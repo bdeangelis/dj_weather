@@ -8,9 +8,19 @@ STATE=[("AK","AK"), ("AL","AL"), ("AR","AR"), ("AZ","AZ"), ("CA","CA"), ("CO","C
  ("TN","TN"), ("TX","TX"), ("UT","UT"), ("VA","VA"), ("WA","WA"), ("WV","WV"), ("WY","WY")]
 
 
+
+def is_united_states(value):
+    """
+    Only searches in US, other country raises an error
+    """
+    print(value)
+    if value != "United States":
+        raise forms.ValidationError('Only able to search US locations')
+
+
 class GetWeather(forms.Form):
-    address = forms.CharField(label="Address")
-    city = forms.CharField(label="City")
-    state = forms.Select(label="State", choices=STATE)
-    zip = forms.CharField(label="Zip")
-    country = forms.Select(label='Country', choices=COUNTRY)
+    address = forms.CharField(label="Address", required=True)
+    city = forms.CharField(label="City", required=True)
+    state = forms.ChoiceField(choices=STATE)
+    zip = forms.CharField(label="Zip", required=True)
+    country = forms.ChoiceField(choices=COUNTRY, validators=[is_united_states])
