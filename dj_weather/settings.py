@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'weather',
+    'django_nose,'
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Using nose to run the tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Provide coverage reports for the apps 
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=weather',
+]
