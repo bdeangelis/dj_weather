@@ -1,2 +1,7 @@
 /venv
 *.pyc
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover

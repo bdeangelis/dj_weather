@@ -11,7 +11,7 @@ def get_forecast(address: str, city: str, state: str, zip_code: str, country: st
     """
     GIVEN the weather api
     WHEN address is included in the url
-    THEN a 5 day forecast object is returned
+    THEN a forecast json object is returned
     """
     # Ideally this key would be placed in a secure store not held in the repo
     API_KEY = 'W8SCBDW9X9DRXWNZSYZEUUVFN'
@@ -43,7 +43,7 @@ def us_forecast(request):
             forecast = get_forecast(address, city, state, zip_code, country)
             days_list = forecast.get('days')
             resolved_address = forecast.get('resolvedAddress')
-            return render(request, 'weather/forecast.html', {'forecast':days_list, 'address': resolved_address})
+            return render(request, 'weather/index.html', {'forecast':days_list, 'address': resolved_address})
 
     else:
         form = GetWeather()
