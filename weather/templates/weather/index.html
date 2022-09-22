@@ -1,41 +1,92 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Encore</title>
-        <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  </head>
-  <body>
+<html lang="en">
 
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand" href="/">Encore</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
 
-    <!-- Optional Javascript -->
-    <h1>Enter your address for a 5 day forcast</h1>
-    <form method="POST">{% csrf_token%}
-        {{form.as_div }}
-        <button type="submit"> Enter </button>
-    </form>
-  </body>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    What's the weather like ?
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <form method="POST">{% csrf_token%}
+                                    {{ form.as_p }}
+                                </form>
+                                <button type="submit" class="button is-info">
+                                    Get Forecast
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <section class="section">
+                <div class="container">
+                    <div class="columns">
+                        <div class="box">
+                            <div class="content">
+                                <p>
+                                    <span class="title">{{ address }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="columns">
+
+                <div class="column is-offset-4 is-4">
+                    {% for i in forecast %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-25x25">
+                                    <img src="https://raw.githubusercontent.com/visualcrossing/WeatherIcons/2de560da89d87de44e3ca2a6593a12c19c8346d3/SVG/1st%20Set%20-%20Color/{{ i.icon }}.svg" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">{{ i.datetime }}</span>
+                                        <br>
+                                        <span class="subtitle">High: {{ i.tempmax }}° F</span>
+                                        <br> 
+                                        <span class="subtitle">Low: {{ i.tempmin }}° F</span>
+                                        <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+</body>
+
 </html>

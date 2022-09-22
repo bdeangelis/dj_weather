@@ -19,8 +19,8 @@ def is_united_states(value):
 
 
 class GetWeather(forms.Form):
-    address = forms.CharField(label="Address", required=True)
-    city = forms.CharField(label="City", required=True)
+    address = forms.CharField(label="Address", required=True, widget=forms.TextInput(attrs={'placeholder': 'Address', 'style': 'width: 300px;', 'class': 'form-control'}))
+    city = forms.CharField(label="City", required=True, widget=forms.TextInput(attrs={'placeholder': 'City', 'style': 'width: 300px;', 'class': 'form-control'}))
     state = forms.ChoiceField(choices=STATE)
-    zip = forms.CharField(label="Zip", required=True)
+    zip = forms.CharField(label="Zip", required=True, widget=forms.TextInput(attrs={'placeholder': 'Zip Code', 'style': 'width: 300px;', 'class': 'form-control'}))         
     country = forms.ChoiceField(choices=COUNTRY, validators=[is_united_states])
