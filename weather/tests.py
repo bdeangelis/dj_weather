@@ -8,13 +8,18 @@ from unittest.mock import patch
 
 class TestWeatherView(TestCase):
     def test_weather_call(self):
+        """
+        GIVEN the base url
+        WHEN  a GET request is sent
+        THEN a 200 response is received
+        """
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
 
 
 class TestFormHelper(TestCase):
     def test_country_not_us(self):
-        """ "
+        """
         GIVEN country choice is not United States
         WHEN country validation executes
         THEN ValidationError is raised
